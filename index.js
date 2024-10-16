@@ -16,7 +16,7 @@ app.get('/redirect', (req, res) => {
   console.log("com.carlos_cacho.invetoryifmsppv2://scanner");
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log("com.carlos_cacho.invetoryifmsppv2://scanner");
-  console.log(`Sandbox listening on port ${port}`);
+  console.log(`Sandbox listening on PORT ${PORT}`);
 });
