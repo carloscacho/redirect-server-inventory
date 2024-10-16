@@ -1,12 +1,18 @@
 const express = require("express");
+const shortId = require("shortid")
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000
+
+app.use(express.json())
+app.use("/.well-known", express.static('.well-known'))
 
 // Defina a URL de redirecionamento
-const redirectTo = "com.carlos_cacho.invetoryifmsppv2://scanner"; // Substitua pela URL desejada
+const redirectTo = "http://localhost:8081/login"; // Substitua pela URL desejada
 // Middleware para redirecionar todas as requisições
 app.get('/redirect', (req, res) => {
-  res.redirect(301, redirectTo);
+  console.log(req.params)
+  res.redirect(redirectTo);
   console.log("com.carlos_cacho.invetoryifmsppv2://scanner");
 });
 
