@@ -19,7 +19,7 @@ app.get('/callback', (req, res) => {
     res.redirect(redirectUrl);
   } else {
     console.log(req.query)
-    res.status(400).json(req.query);
+    res.status(400).json(req.originalUrl);
     
   }
 });

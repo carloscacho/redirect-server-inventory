@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Captura os parâmetros do hash
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const expiresIn = hashParams.get('expires_in');
+        const tokenType = hashParams.get('token_type');
+        const scope = hashParams.get('scope');
+
+        // Redireciona para o servidor com os parâmetros na query string
+        if (accessToken && expiresIn && tokenType && scope) {
+            window.location.href = `https://redirect-server-inventory.onrender.com/?access_token=${accessToken}&expires_in=${expiresIn}&token_type=${tokenType}&scope=${scope}&close=true`;
+        } else {
+            document.body.innerText = "Erro: parâmetros ausentes.";
+        }
+    </script>
+</head>
+<body>
+    Redirecionando...
+</body>
+</html>
