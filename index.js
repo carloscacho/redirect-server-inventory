@@ -1,22 +1,26 @@
 const express = require("express");
-const shortId = require("shortid")
 
 const app = express();
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())
-app.use("/.well-known", express.static('.well-known'))
 
-// Defina a URL de redirecionamento
-const redirectTo = "http://localhost:8081/login"; // Substitua pela URL desejada
-// Middleware para redirecionar todas as requisições
+app.get('/callback', (req, res) => {
+  // Extrai os parâmetros token e date da URL
+  const { access_token, scope, expires_in } = req.query;
+
+  // Monta a URL para redirecionar com o parâmetro adicional "close=true"
+  const redirectUrl = `/redirect?access_token=${access_token}&scope=${scope}&expires_in=${expires_in}&close=true`;
+
+  // Realiza o redirecionamento
+  res.redirect(redirectUrl);
+});
+
 app.get('/redirect', (req, res) => {
-  console.log(req.params)
-  res.redirect(redirectTo);
-  console.log("com.carlos_cacho.invetoryifmsppv2://scanner");
+  // Aqui você pode processar a requisição após o redirecionamento
+  res.send(`URL redirecionada com sucesso com os parâmetros: ${JSON.stringify(req.query)}`);
 });
 
 app.listen(PORT, () => {
-  console.log("com.carlos_cacho.invetoryifmsppv2://scanner");
-  console.log(`Sandbox listening on PORT ${PORT}`);
+  console.log(`listening on PORT ${PORT}`);
 });
