@@ -6,14 +6,20 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 
 app.get('/callback', (req, res) => {
-  // Extrai os parâmetros token e date da URL
-  const { access_token, scope, expires_in } = req.query;
+  const accessToken = req.query.access_token;
+  const scope = req.query.scope;
+  const expiresIn = req.query.expires_in;
 
-  // Monta a URL para redirecionar com o parâmetro adicional "close=true"
-  const redirectUrl = `/redirect?access_token=${access_token}&scope=${scope}&expires_in=${expires_in}&close=true`;
+  // Verifica se os parâmetros necessários estão presentes
+  if (accessToken && scope && expiresIn) {
+    // Monta a URL para redirecionar com o parâmetro adicional "close=true"
+    const redirectUrl = `/redirect?access_token=${accessToken}&scope=${scope}&expires_in=${expiresIn}&close=true`;
 
-  // Realiza o redirecionamento
-  res.redirect(redirectUrl);
+    // Redireciona para a URL com os parâmetros adicionais
+    res.redirect(redirectUrl);
+  } else {
+    res.status(400).send('Parâmetros access_token, scope e expires_in são necessários.');
+  }
 });
 
 app.get('/redirect', (req, res) => {
