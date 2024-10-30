@@ -18,7 +18,7 @@ app.get('/callback', (req, res) => {
     // Redireciona para a URL com os parâmetros adicionais
     res.redirect(redirectUrl);
   } else {
-    res.status(400).send('Parâmetros access_token, scope e expires_in são necessários.');
+    res.status(400).send(`Parâmetros ausentes. URL completa recebida: ${req.originalUrl}`);
   }
 });
 
