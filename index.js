@@ -18,8 +18,8 @@ app.get('/callback', (req, res) => {
     // Redireciona para a URL com os parâmetros adicionais
     res.redirect(redirectUrl);
   } else {
-    console.log(req)
-    res.status(400).json(req);
+    console.log(req.query)
+    res.status(400).json(req.query);
     
   }
 });
