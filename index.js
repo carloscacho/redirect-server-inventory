@@ -18,7 +18,7 @@ app.get('/callback', (req, res) => {
     // Redireciona para a URL com os parâmetros adicionais
     res.redirect(redirectUrl);
   } else {
-    res.status(400).send(`Parâmetros ausentes. URL completa recebida: ${req.originalUrl}`);
+    res.status(400).send(`Parâmetros ausentes. URL completa recebida: ${JSON.stringify(req)}`);
   }
 });
 
