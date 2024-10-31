@@ -10,10 +10,13 @@
         const expiresIn = hashParams.get('expires_in');
         const tokenType = hashParams.get('token_type');
         const scope = hashParams.get('scope');
+        const close = hashParams.get('close');
 
+        if(close){
+          document.body.innerText = "Pagina redirecionada.";
         // Redireciona para o servidor com os parâmetros na query string
-        if (accessToken && expiresIn && tokenType && scope) {
-            window.location.href = `https://redirect-server-inventory.onrender.com/?access_token=${accessToken}&expires_in=${expiresIn}&token_type=${tokenType}&scope=${scope}&close=true`;
+        } else if (accessToken && expiresIn && tokenType && scope && !close) {
+            window.location.href = `https://carloscacho.github.io/redirect-server-inventory/?access_token=${accessToken}&expires_in=${expiresIn}&token_type=${tokenType}&scope=${scope}&close=true`;
         } else {
             document.body.innerText = "Erro: parâmetros ausentes.";
         }
